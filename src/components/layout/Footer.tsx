@@ -78,7 +78,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               <li className="flex items-center gap-2 text-sm text-[--color-gray-400]">
                 <MapPin className="h-4 w-4 text-[--brand-green]" />
-                {siteConfig.address.city}, {siteConfig.address.state}
+                {siteConfig.address.city}, {siteConfig.address.country}
               </li>
               <li className="flex items-center gap-2 text-sm text-[--color-gray-400]">
                 <Mail className="h-4 w-4 text-[--brand-green]" />
