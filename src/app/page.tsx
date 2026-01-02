@@ -4,8 +4,7 @@ import { PortfolioShowcase } from "@/components/sections/PortfolioShowcase"
 import { Stats } from "@/components/sections/Stats"
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline"
 import { CTABanner } from "@/components/layout/CTABanner"
-import { TechMarquee } from "@/components/sections/TechMarquee"
-import { services, portfolio, company, process, masteredTechnologies } from "@/lib/data"
+import { services, portfolio, company, process } from "@/lib/data"
 import { ScrollReveal } from "@/components/animations/ScrollReveal"
 
 export default function Home() {
@@ -18,12 +17,7 @@ export default function Home() {
         secondaryCTA="View Our Work"
       />
       
-      <ScrollReveal width="100%" className="w-full">
-        <TechMarquee 
-          headline="Technologies We Master"
-          technologies={masteredTechnologies}
-        />
-      </ScrollReveal>
+
       
       <ScrollReveal width="100%" className="w-full">
         <ServiceGrid 

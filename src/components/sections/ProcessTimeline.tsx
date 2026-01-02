@@ -8,7 +8,6 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal"
 interface Phase {
   number: string
   name: string
-  duration: string
   description: string
   activities?: string[]
   deliverables?: string[]
@@ -72,13 +71,9 @@ export function ProcessTimeline({ headline, description, phases, showDetails = f
                         {/* Glowing corner accent */}
                         <div className="absolute -top-1 -right-1 h-3 w-3 bg-[--brand-green] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_10px_#22c55e]" />
 
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="mb-4">
                            <span className="text-4xl font-mono font-bold text-white/10 group-hover:text-[--brand-green]/20 transition-colors">
                               {phase.number}
-                           </span>
-                           <div className="h-px flex-1 bg-white/10" />
-                           <span className="text-xs font-mono text-[--brand-green] uppercase tracking-wider bg-[--brand-green]/10 px-2 py-1 rounded">
-                              {phase.duration}
                            </span>
                         </div>
                         
