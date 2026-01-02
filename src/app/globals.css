@@ -10,6 +10,16 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand Colors */
+  --color-brand-green: #16A34A;
+  --color-brand-dark-green: #0F3D2E;
+  --color-brand-red: #DC2626;
+  
+  /* Extended Grays (overriding or supplementing defaults if needed, usually just use specific values) */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-900: #0B0B0B;
 }
 
 @media (prefers-color-scheme: dark) {
