@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
+import { SmoothScroll } from "@/components/animations/SmoothScroll";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        <SmoothScroll />
         <Navigation />
         <main className="flex-grow">
           {children}
