@@ -1,92 +1,93 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
 import { DynamicIcon } from "@/components/ui/DynamicIcon"
-import { ParallaxCard } from "@/components/animations/ParallaxCard"
 import { ScrollReveal } from "@/components/animations/ScrollReveal"
 
 interface Project {
   id: string
   title: string
-  category: string
-  description: string
+  category?: string
+  description?: string
   image: string
-  tags: string[]
+  tags?: string[]
+  industry?: string
+  challenge?: string
+  technologies?: string[]
 }
 
 interface PortfolioShowcaseProps {
   headline: string
-  subheadline: string // Correcting prop name mismatch from usage
+  subheadline: string 
   projects: Project[]
 }
 
 export function PortfolioShowcase({ headline, subheadline, projects }: PortfolioShowcaseProps) {
-  // Map generated images to projects roughly
   const projectImages = [
-    "/home/morphosis/.gemini/antigravity/brain/b96ed461-ddff-4753-96d0-b9f4598e2054/cosmic_glass_1_1767321816460.png",
-    "/home/morphosis/.gemini/antigravity/brain/b96ed461-ddff-4753-96d0-b9f4598e2054/cosmic_glass_2_1767321833391.png",
-    "/home/morphosis/.gemini/antigravity/brain/b96ed461-ddff-4753-96d0-b9f4598e2054/cosmic_glass_3_1767321850561.png"
+    "/images/generated/cosmic_glass_1_1767321816460.png",
+    "/images/generated/cosmic_glass_2_1767321833391.png",
+    "/images/generated/cosmic_glass_3_1767321850561.png"
   ]
 
   return (
-    <section className="bg-black py-24 sm:py-32 border-b border-white/5">
+    <section className="bg-black py-32 border-b border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="w-full">
-            <div className="mb-16 md:flex md:items-center md:justify-between">
-            <div className="max-w-2xl">
-                <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        {/* Header */}
+        <div className="mb-24">
+           <ScrollReveal>
+             <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
                 {headline}
-                </h2>
-                <p className="mt-4 text-lg text-[--color-gray-400]">
-                {/* Fallback if subheadline missing or named description */}
-                {subheadline || "Explore our latest work"} 
-                </p>
-            </div>
-            <div className="mt-8 md:mt-0">
-                <Button variant="outline" asChild>
-                <Link href="/work">View All Projects</Link>
-                </Button>
-            </div>
-            </div>
-        </ScrollReveal>
+             </h2>
+             <p className="text-xl text-[--color-gray-400] max-w-2xl">
+               {subheadline || "Selected work that defines our standard."}
+             </p>
+           </ScrollReveal>
+        </div>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+        {/* Sticky Scroll Container */}
+        <div className="relative">
           {projects.slice(0, 3).map((project, index) => (
-             <ScrollReveal key={project.id} delay={index * 0.1} className="h-full">
-                <ParallaxCard className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 hover:border-[--brand-green]/50 transition-colors duration-500">
-                    <div className="aspect-[4/3] w-full overflow-hidden bg-white/5 relative">
-                        {/* Use real image */}
-                        <img 
+             <div key={project.id} className="sticky top-24 min-h-[60vh] py-12 flex flex-col md:flex-row gap-8 md:gap-16 bg-black">
+                {/* Left Content - Sticky in a way, but actually flows with the container height */}
+                <div className="md:w-5/12 flex flex-col justify-center order-2 md:order-1">
+                   <ScrollReveal delay={0.2}>
+                      <div className="flex flex-wrap gap-2 mb-6">
+                          {(project.tags || (project.industry ? [project.industry] : [])).map((tag: string) => (
+                              <span key={tag} className="px-3 py-1 rounded-full border border-[--brand-green]/20 bg-[--brand-green]/5 text-[--brand-green] text-xs font-mono uppercase tracking-wider">
+                                  {tag}
+                              </span>
+                          ))}
+                      </div>
+                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                        {project.title}
+                      </h3>
+                      <p className="text-lg text-[--color-gray-400] mb-8 leading-relaxed">
+                        {project.challenge || project.description}
+                      </p>
+                      
+                      <div className="flex gap-4">
+                        <Button variant="outline" className="rounded-full px-8 border-white/20 text-white hover:border-white hover:bg-white hover:text-black transition-all" asChild>
+                          <Link href={`/work/${project.id}`}>
+                            View Case Study
+                          </Link>
+                        </Button>
+                      </div>
+                   </ScrollReveal>
+                </div>
+
+                {/* Right Image - The visual anchor */}
+                <div className="md:w-7/12 order-1 md:order-2">
+                   <ScrollReveal className="h-full w-full" delay={0.1}>
+                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+                         <img 
                             src={projectImages[index % 3]} 
                             alt={project.title}
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80" />
-                    </div>
-                    
-                    <div className="relative flex flex-1 flex-col p-8">
-                        <div className="mb-4 flex flex-wrap gap-2">
-                           {/* Accessing tags if available, else standard fallback */}
-                           {(project.tags || [project.industry]).slice(0, 3).map((tag: string) => (
-                                <span key={tag} className="text-xs font-mono font-medium text-[--brand-green] uppercase tracking-wider">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                        <h3 className="mb-3 text-2xl font-bold text-white">
-                            {project.title}
-                        </h3>
-                        <p className="mb-6 flex-1 text-sm text-[--color-gray-400] leading-relaxed line-clamp-3">
-                            {project.challenge || project.description}
-                        </p>
-                        <Link 
-                            href={`/work/${project.id}`}
-                            className="inline-flex items-center text-sm font-semibold text-white hover:text-[--brand-green] transition-colors"
-                        >
-                            View Case Study <DynamicIcon name="ArrowRight" className="ml-2 h-4 w-4" />
-                        </Link>
-                    </div>
-                </ParallaxCard>
-             </ScrollReveal>
+                            className="h-full w-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000"
+                         />
+                         <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent pointer-events-none" />
+                      </div>
+                   </ScrollReveal>
+                </div>
+             </div>
           ))}
         </div>
       </div>

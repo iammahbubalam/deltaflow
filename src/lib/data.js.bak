@@ -649,27 +649,6 @@ export const faqCategories = [
 ];
 
 // ======================
-// MASTERED TECHNOLOGIES
-// ======================
-export const masteredTechnologies = [
-  { id: "tech-python", name: "Python" },
-  { id: "tech-tensorflow", name: "TensorFlow" },
-  { id: "tech-pytorch", name: "PyTorch" },
-  { id: "tech-openai", name: "OpenAI" },
-  { id: "tech-langchain", name: "LangChain" },
-  { id: "tech-aws", name: "AWS" },
-  { id: "tech-gcp", name: "Google Cloud" },
-  { id: "tech-fastapi", name: "FastAPI" },
-  { id: "tech-nextjs", name: "Next.js" },
-  { id: "tech-react", name: "React" },
-  { id: "tech-docker", name: "Docker" },
-  { id: "tech-k8s", name: "Kubernetes" },
-  { id: "tech-postgres", name: "PostgreSQL" },
-  { id: "tech-redis", name: "Redis" },
-  { id: "tech-kafka", name: "Kafka" }
-];
-
-// ======================
 // CONTACT FORM
 // ======================
 export const contactForm = {

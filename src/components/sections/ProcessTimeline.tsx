@@ -1,4 +1,9 @@
+"use client"
+
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { ScrollReveal } from "@/components/animations/ScrollReveal"
 
 interface Phase {
   number: string
@@ -17,69 +22,89 @@ interface ProcessTimelineProps {
 }
 
 export function ProcessTimeline({ headline, description, phases, showDetails = false }: ProcessTimelineProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"]
+  })
+
+  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+
   return (
-    <section className="bg-black py-24 sm:py-32">
+    <section className="bg-black py-24 sm:py-32" ref={containerRef}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {(headline || description) && (
-          <div className="mx-auto max-w-2xl text-center mb-16">
-            {headline && (
-              <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl mb-4">
-                {headline}
-              </h2>
-            )}
-            {description && (
-              <p className="text-lg text-[--color-gray-400]">
-                {description}
-              </p>
-            )}
-          </div>
-        )}
+        <div className="mx-auto max-w-2xl text-center mb-20">
+          <ScrollReveal>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+              {headline || "Our Process"}
+            </h2>
+            <p className="text-xl text-[--color-gray-400]">
+              {description || "A proven methodology for delivering success."}
+            </p>
+          </ScrollReveal>
+        </div>
 
-        <div className="relative">
-          {/* Vertical Line for Desktop */}
-          <div className="absolute left-[19px] top-0 bottom-0 w-0.5 bg-[--color-gray-200] md:left-1/2 md:-ml-0.5 opacity-20" />
+        <div className="relative max-w-4xl mx-auto">
+          {/* BEAM SCROLL LINE */}
+          <div className="absolute left-[28px] top-0 bottom-0 w-[2px] bg-white/10 md:left-1/2 md:-ml-[1px] z-0" />
+          <motion.div 
+             style={{ height }}
+             className="absolute left-[28px] top-0 w-[2px] bg-gradient-to-b from-[--brand-green] via-[--brand-green] to-transparent md:left-1/2 md:-ml-[1px] shadow-[0_0_20px_#22c55e] z-10"
+          />
 
-          <div className="space-y-12">
+          <div className="space-y-20">
             {phases.map((phase, index) => (
-              <div key={phase.name} className={cn("relative flex flex-col md:flex-row gap-8", 
+              <div key={phase.name} className={cn("relative flex items-center md:justify-between", 
                 index % 2 === 0 ? "md:flex-row-reverse" : ""
               )}>
-                {/* Timeline Dot */}
-                <div className="absolute left-0 top-0 mt-1.5 h-10 w-10 flex items-center justify-center rounded-full border-4 border-black bg-[--brand-green] text-black font-bold md:left-1/2 md:-ml-5 z-10 shadow-sm shadow-[--brand-green]/20">
-                  {index + 1}
+                
+                {/* Center Node */}
+                <div className="absolute left-[14px] top-8 -ml-[15px] h-[30px] w-[30px] rounded-full border-4 border-black bg-[--color-gray-100] md:left-1/2 md:-ml-[15px] z-20 flex items-center justify-center">
+                    <div className="h-2 w-2 rounded-full bg-[--brand-green] animate-pulse" />
                 </div>
 
-                {/* Content Side */}
-                <div className={cn("ml-16 md:ml-0 md:w-1/2", 
-                  index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
+                {/* Content Card */}
+                <div className={cn("ml-20 md:ml-0 md:w-[45%]", 
+                  index % 2 === 0 ? "" : ""
                 )}>
-                  <div className={cn("bg-[--color-gray-50] p-6 rounded-2xl border border-[--color-gray-200] hover:border-[--brand-green]/50 transition-colors",
-                     index % 2 === 0 ? "md:mr-5" : "md:ml-5" // Spacing from center line
-                  )}>
-                    <div className={cn("flex items-center gap-2 mb-2", 
-                      index % 2 === 0 ? "md:justify-end" : ""
-                    )}>
-                      <span className="text-xs font-mono font-bold text-[--brand-green] uppercase tracking-wider">{phase.duration}</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-white mb-2">{phase.name}</h3>
-                    <p className="text-[--color-gray-400] mb-4">{phase.description}</p>
-                    
-                    {showDetails && phase.activities && (
-                      <div className="mt-4 pt-4 border-t border-[--color-gray-200]">
-                        <h4 className="text-sm font-semibold text-white mb-2">Activities</h4>
-                        <ul className={cn("list-disc pl-4 text-sm text-[--color-gray-400] space-y-1",
-                          index % 2 === 0 ? "md:mr-4 md:rtl" : "" // RTL for list logic is tricky, simple alignment is better
-                        )}>
-                           {/* Revert align for list in right-aligned card? Actually keeping lists left aligned is usually better for readability even in right blocks, or right align text but list bullets are tricky. Let's keep distinct text alignment. */}
-                           {phase.activities.map(a => <li key={a} className={index % 2 === 0 ? "md:text-right md:list-none" : ""}>{a}</li>)}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
+                  <ScrollReveal delay={index * 0.1} direction={index % 2 === 0 ? "left" : "right"}>
+                     <div className="relative group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[--brand-green]/30 transition-all duration-300">
+                        {/* Glowing corner accent */}
+                        <div className="absolute -top-1 -right-1 h-3 w-3 bg-[--brand-green] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_10px_#22c55e]" />
+
+                        <div className="flex items-center gap-3 mb-4">
+                           <span className="text-4xl font-mono font-bold text-white/10 group-hover:text-[--brand-green]/20 transition-colors">
+                              {phase.number}
+                           </span>
+                           <div className="h-px flex-1 bg-white/10" />
+                           <span className="text-xs font-mono text-[--brand-green] uppercase tracking-wider bg-[--brand-green]/10 px-2 py-1 rounded">
+                              {phase.duration}
+                           </span>
+                        </div>
+                        
+                        <h3 className="text-2xl font-bold text-white mb-3">
+                           {phase.name}
+                        </h3>
+                        <p className="text-[--color-gray-400] leading-relaxed">
+                           {phase.description}
+                        </p>
+
+                        {showDetails && phase.activities && (
+                            <ul className="mt-6 space-y-2 border-t border-white/5 pt-6">
+                                {phase.activities.map(activity => (
+                                    <li key={activity} className="flex items-start gap-2 text-sm text-[--color-gray-400]">
+                                        <div className="mt-1.5 h-1 w-1 rounded-full bg-[--brand-green]" />
+                                        {activity}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                     </div>
+                  </ScrollReveal>
                 </div>
 
-                {/* Empty Side for Desktop layout balance */}
-                <div className="hidden md:block md:w-1/2" />
+                {/* Empty Side for Balance */}
+                <div className="hidden md:block md:w-[45%]" />
               </div>
             ))}
           </div>

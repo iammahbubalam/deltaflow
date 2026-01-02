@@ -1,11 +1,11 @@
 import { Hero } from "@/components/sections/Hero"
-import { ClientLogos } from "@/components/sections/ClientLogos"
 import { ServiceGrid } from "@/components/sections/ServiceGrid"
 import { PortfolioShowcase } from "@/components/sections/PortfolioShowcase"
 import { Stats } from "@/components/sections/Stats"
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline"
 import { CTABanner } from "@/components/layout/CTABanner"
-import { clients, services, portfolio, company, process } from "@/lib/data"
+import { TechMarquee } from "@/components/sections/TechMarquee"
+import { services, portfolio, company, process, masteredTechnologies } from "@/lib/data"
 import { ScrollReveal } from "@/components/animations/ScrollReveal"
 
 export default function Home() {
@@ -19,9 +19,9 @@ export default function Home() {
       />
       
       <ScrollReveal width="100%" className="w-full">
-        <ClientLogos 
-          headline="Trusted by leading companies"
-          logos={clients}
+        <TechMarquee 
+          headline="Technologies We Master"
+          technologies={masteredTechnologies}
         />
       </ScrollReveal>
       
@@ -40,9 +40,8 @@ export default function Home() {
       
       <PortfolioShowcase 
         headline="Results That Matter"
-        description="Real projects, measurable impact"
+        subheadline="Real projects, measurable impact"
         projects={portfolio.filter(p => p.featured)}
-        cta="View All Projects"
       />
       
       <Stats 
