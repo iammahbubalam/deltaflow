@@ -6,13 +6,12 @@ export const siteConfig = {
   name: "DeltaFlow",
   tagline: "Synchronizing Intelligence with Business",
   description: "Custom AI development agency building intelligent solutions for forward-thinking companies",
-  url: "https://deltaflow.ai",
-  email: "contact@deltaflow.ai",
-  phone: "+1 (555) 123-4567",
+  url: "https://deltaflowlab.com",
+  email: "contact@deltaflowlab.com",
+  phone: "+880 1726-131573",
   address: {
-    city: "San Francisco",
-    state: "CA",
-    country: "United States"
+    city: "Dhaka",
+    country: "Bangladesh"
   },
   social: {
     linkedin: "https://linkedin.com/company/deltaflow",
@@ -485,7 +484,7 @@ export const company = {
     headline: "World-class AI engineers",
     description: "Our team combines deep technical expertise with business acumen",
     size: "25+ engineers",
-    locations: ["San Francisco", "New York", "Remote"],
+    locations: ["Dhaka", "Remote"],
     expertise: [
       "Machine Learning Engineers",
       "AI Researchers",
