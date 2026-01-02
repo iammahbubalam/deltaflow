@@ -486,12 +486,12 @@ export const testimonials = [
 // CLIENT LOGOS
 // ======================
 export const clients = [
-  { name: "TechCorp", logo: "/images/clients/techcorp.svg" },
-  { name: "FinanceHub", logo: "/images/clients/financehub.svg" },
-  { name: "RetailCo", logo: "/images/clients/retailco.svg" },
-  { name: "HealthPlus", logo: "/images/clients/healthplus.svg" },
-  { name: "DataFlow", logo: "/images/clients/dataflow.svg" },
-  { name: "AutoMate", logo: "/images/clients/automate.svg" }
+  { id: "techcorp", name: "TechCorp", logo: "/images/clients/techcorp.svg" },
+  { id: "financehub", name: "FinanceHub", logo: "/images/clients/financehub.svg" },
+  { id: "retailco", name: "RetailCo", logo: "/images/clients/retailco.svg" },
+  { id: "healthplus", name: "HealthPlus", logo: "/images/clients/healthplus.svg" },
+  { id: "dataflow", name: "DataFlow", logo: "/images/clients/dataflow.svg" },
+  { id: "automate", name: "AutoMate", logo: "/images/clients/automate.svg" }
 ];
 
 // ======================

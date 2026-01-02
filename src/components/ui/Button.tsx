@@ -14,19 +14,19 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", loading, fullWidth, asChild = false, children, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    const baseStyles = "inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]"
+    const baseStyles = "inline-flex items-center justify-center rounded-full font-mono font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[--color-gray-400] disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] tracking-wide"
     
     const variants = {
-      primary: "bg-[--brand-green] text-white hover:bg-[--brand-dark-green] shadow-lg shadow-green-900/20",
-      secondary: "bg-[--color-gray-900] text-white hover:bg-black",
-      outline: "border-2 border-[--color-gray-100] bg-transparent text-[--color-gray-900] hover:bg-[--color-gray-50]",
-      ghost: "bg-transparent text-[--color-gray-900] hover:bg-[--color-gray-100]"
+      primary: "bg-white text-black hover:bg-[--color-gray-200] hover:text-white border border-transparent hover:border-[--color-gray-500]", // x.ai style: white pill or ghost
+      secondary: "bg-[--color-gray-100] text-white hover:bg-[--color-gray-200] border border-[--color-gray-200]",
+      outline: "border border-[--color-gray-200] bg-transparent text-white hover:bg-white/5 hover:border-white/20", // The signature look
+      ghost: "bg-transparent text-[--color-gray-400] hover:text-white hover:bg-white/5"
     }
     
     const sizes = {
-      sm: "h-9 px-4 text-sm",
-      md: "h-11 px-6 text-base",
-      lg: "h-14 px-8 text-lg" // Larger for heroic CTAs
+      sm: "h-8 px-4 text-xs",
+      md: "h-10 px-6 text-sm",
+      lg: "h-12 px-8 text-sm" 
     }
     
     return (

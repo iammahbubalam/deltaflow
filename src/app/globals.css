@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* x.ai "Cosmic Minimalism" Theme */
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -10,16 +11,28 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-
-  /* Brand Colors */
-  --color-brand-green: #16A34A;
-  --color-brand-dark-green: #0F3D2E;
-  --color-brand-red: #DC2626;
   
-  /* Extended Grays (overriding or supplementing defaults if needed, usually just use specific values) */
-  --color-gray-50: #F9FAFB;
-  --color-gray-100: #F3F4F6;
-  --color-gray-900: #0B0B0B;
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+  
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 2rem));
+    }
+  }
+
+  /* Brand Colors - Adjusted for "Terminal" aesthetic */
+  --color-brand-green: #22c55e; /* Brighter neon green for dark bg */
+  --color-brand-dark-green: #14532d;
+  --color-brand-red: #ef4444;
+  
+  /* Extended Grays - Stealth & Technical */
+  --color-gray-50: #0a0a0a;   /* Subtle differentiation from black */
+  --color-gray-100: #171717;  /* Component backgrounds */
+  --color-gray-200: #262626;  /* Borders */
+  --color-gray-300: #404040;  /* Stronger borders */
+  --color-gray-400: #a3a3a3;  /* Muted text */
+  --color-gray-500: #737373;  /* Even more muted */
+  --color-gray-900: #ffffff;  /* Primary text */
 }
 
 @media (prefers-color-scheme: dark) {

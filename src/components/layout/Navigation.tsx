@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { navigation, siteConfig } from "@/lib/data"
 import { Button } from "@/components/ui/Button"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 export function Navigation() {
@@ -19,12 +19,12 @@ export function Navigation() {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[--color-gray-100] bg-white/80 backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-black/50 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight">
+          <Link href="/" className="flex items-center gap-2 font-mono font-bold text-xl tracking-tighter">
             <span className="text-[--brand-green] text-2xl">▲</span>
-            <span className="text-[--color-gray-900]">{siteConfig.name}</span>
+            <span className="text-white">{siteConfig.name}</span>
           </Link>
         </div>
 
@@ -35,23 +35,28 @@ export function Navigation() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-[--brand-green]",
+                "text-xs font-mono font-medium tracking-widest uppercase transition-colors hover:text-white",
                 pathname === item.href
-                  ? "text-[--brand-green]"
-                  : "text-[--color-gray-900]"
+                  ? "text-white"
+                  : "text-[--color-gray-400]"
               )}
             >
               {item.name}
             </Link>
           ))}
-          <Button size="sm" asChild>
-            <Link href="/contact">Get Started</Link>
-          </Button>
+          <div className="pl-4 border-l border-white/10">
+              <Link 
+                  href="/contact" 
+                  className="text-xs font-mono tracking-widest uppercase text-white hover:text-[--brand-green] transition-colors"
+              >
+                  [ Start Project ]
+              </Link>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className="flex items-center justify-center p-2 text-[--color-gray-900] md:hidden"
+          className="flex items-center justify-center p-2 text-white md:hidden"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -65,7 +70,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-b border-[--color-gray-100] bg-white md:hidden overflow-hidden"
+            className="border-b border-white/10 bg-black md:hidden overflow-hidden"
           >
             <nav className="flex flex-col p-4 gap-4">
               {navigation.main.map((item) => (
@@ -73,17 +78,17 @@ export function Navigation() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "text-base font-medium transition-colors hover:text-[--brand-green]",
+                    "text-base font-mono font-medium transition-colors hover:text-white",
                     pathname === item.href
-                      ? "text-[--brand-green]"
-                      : "text-[--color-gray-900]"
+                      ? "text-white"
+                      : "text-[--color-gray-400]"
                   )}
                 >
                   {item.name}
                 </Link>
               ))}
               <Button className="w-full" asChild>
-                <Link href="/contact">Get Started</Link>
+                <Link href="/contact">Start Project</Link>
               </Button>
             </nav>
           </motion.div>

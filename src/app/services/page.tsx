@@ -14,7 +14,7 @@ export default function ServicesPage() {
         subheadline="Comprehensive AI development solutions for your business"
       />
       
-      <section className="py-24 sm:py-32 bg-white">
+      <section className="py-24 sm:py-32 bg-black">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {services.map((service) => (
@@ -22,7 +22,7 @@ export default function ServicesPage() {
                 <div className="h-14 w-14 rounded-xl bg-[--brand-green]/10 flex items-center justify-center text-[--brand-dark-green] mb-6">
                   <DynamicIcon name={service.icon} size={28} />
                 </div>
-                <h3 className="text-2xl font-bold text-[--color-gray-900] mb-2">
+                <h3 className="text-2xl font-bold text-white mb-2">
                   {service.name}
                 </h3>
                 <p className="text-sm font-semibold text-[--brand-green] mb-4 uppercase tracking-wider">
@@ -33,7 +33,7 @@ export default function ServicesPage() {
                 </p>
                 
                 <div className="mb-8">
-                  <h4 className="text-sm font-semibold text-[--color-gray-900] mb-3">Key Benefits:</h4>
+                  <h4 className="text-sm font-semibold text-white mb-3">Key Benefits:</h4>
                   <ul className="space-y-2">
                     {service.benefits.slice(0, 3).map((benefit) => (
                       <li key={benefit} className="flex items-start text-sm text-[--color-gray-400]">
@@ -56,7 +56,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-[--color-gray-50] py-24 sm:py-32">
+      <section className="bg-black py-24 sm:py-32 border-t border-[--color-gray-100]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-16">
              <h2 className="text-3xl font-extrabold text-[--color-gray-900]">Why Work With DeltaFlow</h2>
